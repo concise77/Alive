@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>aLive.js-生命周期插件-简约程序开发</title>
+    <style>
+    	@keyframes leftin
+		{
+		    from {left:-100%;}
+		    to {left:0;}
+		}
+		@keyframes leftout
+		{
+		    from {left:0;}
+		    to {left:-100%;}
+		}
+		@keyframes rightin
+		{
+		    from {right:-100%;}
+		    to {right:0;}
+		}
+		@keyframes rightout
+		{
+		    from {right:0;}
+		    to {right:-100%;}
+		}
+		*{padding: 0;margin: 0;text-align: center;}
+		.box{position: fixed;top: 0;bottom: 0;padding-bottom: 50px;left: 0;right: 0;background-color: #f0f0f0;}
+		.frame{height: 100%;width: 65%;float: left;}
+		.panel{width: 35%;float: right;height: 100%;background-color: #fff;}
+		.list{margin-right: 20px;background-color: #fff;height: 100%;list-style: none;overflow: scroll;}
+		.list li{line-height: 50px;background-color: #ccc;border-bottom: 1px solid #fff;}
+		button{
+			background-color: #4CAF50; /* Green */
+			border: none;
+			color: white;
+			padding: 15px 32px;
+			text-align: center;
+			text-decoration: none;
+			display: inline-block;
+			font-size: 16px;
+			margin: 4px 2px;
+			cursor: pointer;
+		}
+		.copyright{position: absolute;bottom: 0;width: 100%;line-height: 50px;text-align: center;}
+	</style>
+    <script src="aLive.js"></script>
+    <script type="text/javascript">
+        function add(){
+		    var obj = document.createElement('li');
+		    var att = document.createAttribute('alive-time');
+		    att.value=parseInt(Math.random()*10000);
+		    var abb = document.createAttribute('alive-itime');
+		    abb.value="5000";
+		    var obb = document.createAttribute('alive-otime');
+		    obb.value="1000";
+		    var ani = document.createAttribute('alive-eanimate');
+		    ani.value="leftout";
+		    var cla = document.createAttribute('class');
+		    cla.value='alive';
+		    obj.setAttributeNode(att);
+		    obj.setAttributeNode(cla);
+		    obj.setAttributeNode(abb);
+		    obj.setAttributeNode(obb);
+		    obj.setAttributeNode(ani);
+		    obj.innerText = "生存时间：" + att.value/1000+"s";
+		    obj.style = 'position:relative;animation:rightin 5s;'+'background-color:#'+parseInt(Math.random()*256).toString(16)+parseInt(Math.random()*256).toString(16)+parseInt(Math.random()*256).toString(16);
+		    document.getElementsByClassName('list')[0].appendChild(obj);
+		}
+        var live = new aLive('alive');
+        live.resize = function(){
+        	//alert();
+        }
+        live.ready =function(){
+        	for(i=0;i<10;i++){
+        		add();
+        	}
+        }
+        live.change=function(e){
+
+        }
+    </script>
+</head>
+<body>
+	<div class="box">
+		<div class="frame">
+			<ul class="list" onchange="alert()">
+			</ul>
+		</div>
+		<div class="panel">
+			<button height="50" width="100" onclick="add()">添加</button>
+		</div>
+		<p class="copyright">copyright by <a href="https://www.concisenet.cn">concisenet.cn</a>简约程序开发</p>
+	</div>
+
+    
+    
+</body>
+</html>
